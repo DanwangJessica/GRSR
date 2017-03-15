@@ -1,0 +1,72 @@
+GRIMM:
+Genome Rearrangements In Man and Mouse
+Copyright (C) 2001-2006 The Regents of the University of California
+
+Contains code from GRAPPA 1.02:
+Genome Rearrangements Analysis under Parsimony and other Phylogenetic Algorithms
+Copyright (C) 2000-2001  The University of New Mexico and
+                         The University of Texas at Austin
+
+GRIMM is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License, Version 2,
+dated June 1991, as published by the Free Software Foundation.
+
+GRIMM is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+------------------------------------------------------------------------------
+
+Authors for GRIMM:
+    Glenn Tesler
+    Department of Mathematics
+    University of California, San Diego
+    La Jolla, CA 92093-0112
+    <gptesler@math.ucsd.edu>
+    http://math.ucsd.edu/~gptesler
+
+Authors for GRAPPA:
+    David A. Bader
+    Electrical and Computer Engineering Department
+    University of New Mexico
+    Albuquerque, NM 87131
+    +1.505.277.6724
+    <dbader@eece.unm.edu>
+    http://www.eece.unm.edu/~dbader
+
+    Bernard M.E. Moret
+    Department of Computer Science
+    University of New Mexico
+    Albuquerque, NM 87131
+    +1.505.277.5699
+    <moret@cs.unm.edu>
+    http://www.cs.unm.edu/~moret
+
+    Tandy Warnow
+    Department of Computer Sciences
+    University of Texas, Austin
+    Austin, TX 78712
+    +1.512.471.9724 
+    <tandy@cs.utexas.edu>
+    http://www.cs.utexas.edu/users/tandy/
+     
+    Stacia K Wyman
+    Department of Computer Sciences
+    University of Texas, Austin
+    Austin, TX 78712
+    +1.512.232.7432
+    <stacia@cs.utexas.edu>
+    http://www.cs.utexas.edu/users/stacia
+
+    Mi Yan
+    Electrical and Computer Engineering Department
+    University of New Mexico
+    Albuquerque, NM 87131
+    +1.505.277.6185
+    <miyan@unm.edu>
+    http://www.ahpcc.unm.edu/~miyan/

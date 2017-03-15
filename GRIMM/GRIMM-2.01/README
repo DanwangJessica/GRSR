@@ -1,0 +1,238 @@
+------------------
+|  INTRODUCTION  |
+------------------
+
+Program: GRIMM 2.01: Genome Rearrangements in Man and Mouse
+Author:  Glenn Tesler, gptesler@math.ucsd.edu
+Date:    2 August 2006
+
+Contains code from GRAPPA 1.02 by David A. Bader, Bernard M.E. Moret,
+Tandy Warnow, Stacia K Wyman, Mi Yan.
+
+GRIMM stands for Genome Rearrangements in Man and Mouse.  GRIMM
+regards genomes as signed or unsigned permutations of numbers
+1,2,...,n, representing orthologous elements (syntenic blocks,
+homologous genes, etc.).  GRIMM implements several algorithms to
+determine the most parsimonious distance between two genomes based on
+reversals (single chromosome case) or reversals plus translocations,
+fissions, and fusions (multiple chromosome case).
+
+Most of the algorithms are described in the papers listed
+in the references, but some of the algorithms for unsigned genomes
+are not yet published.
+
+-----------
+|  SETUP  |
+-----------
+
+This program has only been tested on SunOS, Linux, and Mac OS X.
+
+("%" is the unix prompt)
+
+% gzip -d GRIMM_2.01.tar.gz
+% tar xvf GRIMM_2.01.tar
+% cd GRIMM_2.01
+% make
+
+("gzip -d" might be "gunzip" on your system)
+("make" might be "gmake")
+
+The executable is called grimm and you should either copy it to
+your bin directory or should add this directory to your PATH.
+Some demonstration files are in the subdirectory data.
+
+-----------
+|  USAGE  |
+-----------
+
+Usage: grimm -f datafile [-o outfile] [other options]
+
+   -f datafile: name of file containing all the genomes
+   -o outfile: output file name.  Output goes to STDOUT unless -o used.
+   -v: Verbose output.
+       In pairwise mode, outputs all the graph parameters.
+       In matrix mode, outputs matrices for all graph parameters.
+       In special functions, outputs extra information.
+
+Genome type:
+   -L: unichromosomal (directed) linear
+   -C: unichromosomal circular
+   Multichromosomal (undirected linear chromosomes) used unless -L/-C given
+
+Genome selection:
+   -g i,j: compare genomes i and j (counting from 1)
+      Rearrangement scenario will go from genome i to genome j.
+      In Hannenhalli-Pevzner papers, genome i is gamma and genome j is pi.
+      For files with 3 or more genomes, unless -g is specified, a distance
+      matrix is printed and options -d, -c, -z, -s are not available.
+   -m: force matrix output even for 2 genomes
+
+Function: (default -d -c -s for multichromosomal, -d -s for unichromosomal)
+   -d: distance
+   -c: show capping
+   -z: show capping and chromosome delimeters too
+   -s: display an optimal scenario (see -S below)
+   -u: distance of unsigned genomes; find signs giving optimal distance
+   -U #: unsigned genomes approximation algorithm with # iterations
+   -W file: optional file with weight matrix for -U
+   -S #: produce/display optimal scenario in a certain format (#=1,...,7)
+      #=1: operations may occur in any order
+      #=2,...,7: operations are prioritized
+        rev. short->long; flip chromos; fusion; transloc short->long; fission
+      #=1,2,3,4: scenario respects initial capping
+      #=5,6,7: scenario may not respect initial capping, so can avoid flips
+      #=2: 1-line permutations with caps
+      #=3: multiline permutations, show caps, / at end of chromo
+      #=4: multiline permutations, hide caps, $ at end of chromo
+      #=5,6,7: different greedy approaches to reversals first
+        They allow recapping, so hide caps and show $ at end of each chromo
+
+Special functions:
+   -t#: test all 1-step reversals, list the ones reducing distance by 1,
+       and give statistics
+       #=1,2,3,4 specifies test method (debugging)
+   -F n: tabulate statistics for given # genes n
+   -T xxx: output graph in TeX form.  xxx is a combination of
+      l: left-to-right format  c: component/cycle format  (only use one)
+      b: bracket chromosomes
+      s: signed labels
+      u: unsigned labels 2x-1,2x  a: unsigned labels a,b  (only use one)
+      r: list of raw components, cycles, paths, not TeX format
+      1-6: stage in multichromosomal capping algorithm
+      Some argument must be given, so use 1 if nothing else
+
+Debugging (not for general use):
+   -D1: delete caps from multichromosomal genomes, treat as linear
+   -D2: put caps on multichromosomal genomes, then treat them as unichromosomal
+   -M n: the data appears in unichromosomal format, but has been manually
+       capped for n chromosomes
+   -X arg: demo of extensions
+
+
+------------
+|  FORMAT  |
+------------
+
+Format of datafile: each entry has the form
+   >human
+   # Chromosome 1
+   5 -2 3 -1 $
+   # Chromosome 2
+   7 -4 6 $
+   # Chromosome 3
+   8
+   ...
+   >mouse
+   ...
+Each genome starts with a line ">genomename".
+The genes are separated by any whitespace, and may be on multiple lines.
+The chromosomes are separated by ";" or "$".  New lines between
+chromosomes are recommended for neatness but are not required.
+Comments begin with "#" and go to the end of the line.
+
+With the -U option only, strips of unknown orientation may be bracketed:
+   5 [ -2 3 ] -1 $
+means it's either -2 3 or -3 2 but the unbracketed genes are fixed.
+If no [] with the -U option then unknown signs on all genes in genomes 2,3,...
+Brackets {} () are reserved and currently ignored.
+
+
+--------------
+|  EXAMPLES  |
+--------------
+
+Here are few basic examples that you should be able to run directly.
+
+% grimm -f data/sample_data.txt
+Gives a distance matrix (since there are 4 genomes).
+
+% grimm -f data/sample_data.txt -g 1,4
+-g 1,4: gives three things regarding the first and fourth genomes:
+(1) distance
+(2) multichromosomal "capping"
+(3) a possible rearrangement scenario proving that distance is achievable
+
+% grimm -f data/sample_data.txt -g 1,4 -d
+-d: Distance only (from 1st to 4th genome because of -g 1,4)
+
+% grimm -f data/sample_data.txt -g 1,4 -d -v
+Distance from 1st to 4th genome, plus more statistics on the breakpoint graph.
+
+% grimm -f data/sample_data.txt -g 1,4 -c
+% grimm -f data/sample_data.txt -g 1,4 -z
+Multichromosomal capping for scenario between 1st and 4th genome.
+-c: as one line permutation, equivalent to the single chromosome sorting
+by reversals problem;
+-z: split onto separate lines by chromosome
+
+% grimm -f data/p225.txt
+This file is for the two genomes on p. 225 of Pevzner's book.
+Gives distance, multichromosomal capping, and a possible rearrangement
+scenario from the first to the second genome.
+
+% grimm -f data/p225.txt -g 2,1
+Similar but goes from the second to the first genome.
+
+% grimm -f data/gollan12.txt -L -u
+Gives a scenario between the two genomes.
+-L: unichromosomal directed linear
+-u: unsigned genes, find a single assignment of signs that gives a most
+parsimonious scenario.
+
+% grimm -f data/gollan12.txt -L -U 100
+Also for unsigned data but using an approximation algorithm.
+Searches for sign pattern(s) that give most parsimonious distance,
+and reports on pattern(s) giving the smallest distance it finds.
+-U 100: 100 random trials of the approximation algorithm.
+
+% grimm -f data/uns_3all.txt: -C -u
+These 13 permutations are all equivalent as circular unsigned genomes.
+This will display a 13x13 matrix of their pairwise distances as
+circular unsigned genomes (which should all be 0 since they're equivalent).
+-C: Circular genomes
+-u: unsigned genes (so the signs on them are irrelevant)
+
+% grimm -f data/unsigned1.txt -L -u
+% grimm -f data/unsigned1.txt -L -u -g 1,2
+% grimm -f data/unsigned1.txt -L -U 100 
+
+
+----------------
+|  REFERENCES  |
+----------------
+
+1. Hannenhalli, S. and Pevzner, P.A. (1995a) Transforming cabbage into
+   turnip (polynomial algorithm for sorting signed permutations by reversals).
+   In Proceedings of the 27th Annual ACM Symposium on the Theory of Computing,
+   pp. 178-189.  (Full journal version with same title appeared in (1999)
+   J. ACM 46: 1-27).
+
+2. Hannenhalli, S. and Pevzner, P.A. (1995b) Transforming men into mice
+   (polynomial algorithm for genomic distance problem).  In 36th Annual
+   Symposium on Foundations of Computer Science (Milwaukee, WI, 1995). IEEE
+   Comput. Soc. Press, Los Alamitos, CA, pp. 581-592.
+
+3. Hannenhalli, S. and Pevzner, P.A. (1996) To cut or not to cut
+   (applications of comparative physical maps in molecular evolution).  In
+   Proceedings of the Seventh Annual ACM-SIAM Symposium on Discrete Algorithms
+   (Atlanta, GA, 1996), ACM, New York, pp. 304-313.
+
+4. Bader, D., Moret, B., and Yan, M. (2001) A linear-time algorithm for
+   computing inversion distances between signed permutations with an
+   experimental study.  J. Comput. Biol. 8(5): 483-491.
+
+5. Tesler, G. (2002a) GRIMM: genome rearrangements web
+   server. Bioinformatics 18(3): 492-3.
+
+6. Tesler, G. (2002b) Efficient algorithms for multichromosomal genome
+   rearrangements. J Comp Sys Sci 65(3): 587-609.
+
+7. Ozery-Flato, M. and Shamir, R. (2003) Two notes on genome
+   rearrangement. J. Bioinform. Comput. Biol. 1(1): 71-94.
+   
+   
+----------
+|  BUGS  |
+----------
+
+Contact: gptesler@math.ucsd.edu

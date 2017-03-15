@@ -1,0 +1,33 @@
+Mugsy - multiple whole genome alignment tool
+
+Citation:
+Angiuoli SV, Salzberg SL. Mugsy: Fast multiple alignment of closely related whole genomes. Bioinformatics. 2010 Dec 9.
+
+See README.install for installation
+
+To run 
+
+%bash
+%source mugsyenv.sh
+%mugsy --help
+
+Mugsy generates MAF formatted multiple alignments from FASTA inputs. The
+wrapper script 'mugsy' invokes all the steps to calculate the multiple
+alignment.
+
+Example invocation
+% mugsy --directory /local/scratch --prefix mygenomes genome1.fsa genome2.fsa genome3.fsa
+
+The core executables are
+
+mugsyWGA - whole genome aligner based on Seqan::TCoffee
+
+synchain-mugsy - segmentation program to produce locally collinear
+blocks (LCBs) from a set of anchors
+
+nucmer - 3.20 release bundled for convenience with new utility
+delta2maf and modified delta-filter to add support for reporting
+duplications 
+
+
+

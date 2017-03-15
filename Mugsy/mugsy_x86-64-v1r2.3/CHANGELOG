@@ -1,0 +1,16 @@
+*Mugsy 1.2.3 (12/21/2011)
+-Raised hard-coded max genome limit to 256
+-Recompile with more portable options
+-Fixes to correct reporting of unaligned seqs at beginning of contigs and in some repeats
+-Performance improvement for draft genomes
+
+*Mugsy 1.2.2 (5/25/2011)
+-Compilation and portability improvements
+
+*Mugsy 1.2.1 (12/16/2010)
+-Raised hard-coded max genome limit to 128. Plans to remove this limit in the future
+-Documentation updates and portability fixes 
+
+*Mugsy 1.2 (11/1/2010)
+-First public release
+Citation: Angiuoli SV, Salzberg SL. Mugsy: Fast multiple alignment of closely related whole genomes. Bioinformatics. 2010 Dec 9.

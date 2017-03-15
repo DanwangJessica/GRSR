@@ -1,0 +1,313 @@
+Program: GRIMM-Synteny 2.01
+Author:  Glenn Tesler, gptesler@math.ucsd.edu
+Date:    6 September 2006
+
+------------------
+|  FILE FORMATS  |
+------------------
+
+Most of the examples below are from the directories
+hmrc_gene_coords/anchors_example
+hmrc_gene_coords/gene7_example
+
+but when noted, they are from the directories
+hmrc_align_coords/anchors_example
+hmrc_align_coords/300K_example
+
+-----------------------------
+|  k-way coordinate format  |
+-----------------------------
+
+This is the format of input files to GRIMM-Synteny and GRIMM-Anchors,
+and is also the format of some of the output files
+(unique_coords.txt on GRIMM-Anchors output,
+blocks.txt on GRIMM-Synteny output).
+Do not include the indentation shown here:
+
+   # comments are lines beginning with #
+   # special comments to specify the species:
+   # genome1: human
+   # genome2: mouse
+   # genome3: rat
+   # genome4: chicken
+   #
+   # So there are k=4 species. Each line will have 4k+1 fields:
+   # ID genome1_chr genome1_start genome1_len genome1_sign genome2_chr genome2_start genome2_len genome2_sign genome3_chr genome3_start genome3_len genome3_sign genome4_chr genome4_start genome4_len genome4_sign
+   #
+   # ID is a number.  Use 0 if not important.
+   # *_chr: chromosome name (can be a string)
+   # *_start: start coordinates in nucleotides on + strand
+   # *_len: length in nucleotides on + strand
+   # *_sign: "+" or "1" or "+1" for positive strand
+   #         "-" or "-1" for negative strand (meaning the based paired
+   #         to those on the positive strand whose coordinates were just
+   #         given)
+   0 1 923263 34266 + 4 152775215 17272 - 5 172969637 9230 - 21 2548631 5315 +
+   0 5 126929555 37439 + 18 57731473 26125 + 18 53194208 22005 + W 4319028 17980 +
+   0 X 150617234 38651 + X 57109277 40007 + X 159004248 23578 + 4 11049589 9069 -
+
+-----------------------------------------
+|  GRIMM-Anchors output: report_ga.txt  |
+-----------------------------------------
+
+Log file describing the parameters for GRIMM-Anchors,
+how many non-conflicting alignments were kept,
+how many conflicting alignments were merged into "merged anchors",
+and how many were found to be in repeat families.
+
+---------------------------------------------
+|  GRIMM-Anchors output: unique_coords.txt  |
+---------------------------------------------
+
+unique_coords.txt has the "k-way format" described above.
+
+Merged anchors will be noted with a comment:
+   0 1 190379457 129356 + 1 144028881 95278 - 13 57456093 92238 - 8 3334879 89670 - # merged; repeat 39
+
+For details of what alignments were merged, see "repeat 39" in
+repeat_coords.txt, below.
+
+---------------------------------------------
+|  GRIMM-Anchors output: repeat_coords.txt  |
+---------------------------------------------
+
+This describes all the conflicting alignments in the input.
+They are simplified into "repeats" in each species (although since
+we are going on coordinates and not base-level alignments,
+they might not actually be repeats).
+
+"repeat 60: 1 x 2 x 2 x 1 (4)" indicates that repeat # 60
+has 1 interval in human, 2 in mouse, 2 in rat, 1 in chicken,
+with 4 alignments supporting this repeat.
+The interval coordinates for each species then follow,
+e.g., the human "2 68324602 138294 +" is on chromosome 2,
+start 68324602, length 138294, sign +.
+
+  ...
+  repeat 60: 1 x 2 x 2 x 1 (4)
+  species 1:
+  2 68324602 138294 +
+  species 2:
+  11 17274632 5462 -
+  11 17293752 20950 -
+  species 3:
+  14 98130545 20184 -
+  14 98066478 49917 -
+  species 4:
+  3 5910648 50047 -
+  support:
+  0 2 68324602 138294 + 11 17274632 5462 - 14 98130545 20184 - 3 5910648 50047 -
+  0 2 68324602 138294 + 11 17274632 5462 - 14 98066478 49917 - 3 5910648 50047 -
+  0 2 68324602 138294 + 11 17293752 20950 - 14 98130545 20184 - 3 5910648 50047 -
+  0 2 68324602 138294 + 11 17293752 20950 - 14 98066478 49917 - 3 5910648 50047 -
+  ...
+
+When signs are ambiguous, a supermajority vote (given by -T option)
+is used to determine signs.  If there is no supermajority,
+the interval sign will be listed as 0.
+if there is a supermajority, the support alignments inconsistent
+with that sign will be marked with a comment "# sign error".
+This example is from hmrc_align_data/anchors_example/repeats_coords.txt:
+
+  repeat 10024: 8 x 2 x 1 x 1 (9)
+  species 1:
+  7 49457907 441 +
+  10 105864101 72 -
+  10 105864480 239 -
+  10 105864719 284 -
+  13 67777580 39 -
+  13 67777995 583 0 # ambiguous sign
+  13 67779496 51 -
+  17 56555391 764 -
+  species 2:
+  11 88827597 760 +
+  19 47691912 342 -
+  species 3:
+  10 76358091 762 +
+  species 4:
+  19 8254062 755 + # ambiguous sign
+  support:
+  0 7 49457907 441 + 11 88827805 452 + 10 76358300 450 + 19 8254273 439 +
+  0 10 105864101 72 - 11 88828145 77 + 10 76358639 77 + 19 8254600 77 +
+  0 10 105864480 239 - 11 88827907 237 + 10 76358402 236 + 19 8254371 229 +
+  0 10 105864719 284 - 19 47691912 342 - 10 76358094 308 + 19 8254065 306 +
+  0 13 67777580 39 - 11 88828209 58 + 10 76358703 57 + 19 8254685 36 +
+  0 13 67777995 583 - 11 88827676 503 + 10 76358171 502 + 19 8254142 494 +
+  0 13 67778395 2 + 11 88827890 2 + 10 76358385 2 + 19 8254317 2 - # sign error
+  0 13 67779496 51 - 11 88827617 50 + 10 76358112 50 + 19 8254082 51 +
+  0 17 56555391 764 - 11 88827597 760 + 10 76358091 762 + 19 8254062 755 +
+
+Overlapping alignments that have the same orientation and
+relative position to all other alignments will be merged together
+into a single "anchor", output in both unique_coords.txt and
+repeat_coords.txt with a "merged" designation (see repeat 127).
+
+  repeat 390: 1 x 1 x 2 x 2 (2)
+  species 1:
+  16 2195167 5768 +
+  species 2:
+  17 23161245 5486 -
+  species 3:
+  10 13727769 2608 -
+  10 13726355 923 -
+  species 4:
+  14 8523871 4257 +
+  14 8528921 1892 +
+  support:
+  0 16 2195167 4154 + 17 23161245 5486 - 10 13727769 2608 - 14 8523871 4257 +
+  0 16 2199178 1757 + 17 23161913 1114 - 10 13726355 923 - 14 8528921 1892 +
+
+--------------------------------------
+|  GRIMM-Synteny output: report.txt  |
+--------------------------------------
+
+Log file describing the parameters for GRIMM-Synteny,
+the steps taken and inconsistencies encountered,
+analysis of microrearrangements in each block,
+and global analysis of macrorearrangements of all blocks.
+If there are oddities such as overlapping blocks, ambiguous signs, etc.,
+they are noted in this file.
+
+Here are excerpts from hmrc_align_data/300K_example/report.txt:
+
+Under microrearrangement analysis the first block is
+
+  block 1: 868 anchors
+    Block lengths         6879989   5303988   4962995   2381594
+    Support (nuc)          191868    189580    188973    193854
+    Support (%)          2.78878%  3.57429%  3.80764%  8.13967%
+    distance           |    1 |    6    5 |    4    5   10 
+    # breakpoints      |    2 |    7    5 |    7    9   14 
+    # long cycles      |    1 |    2    1 |    3    4    5 
+    # hurdles          |    0 |    1    1 |    0    0    1 
+    # fortresses       |    0 |    0    0 |    0    0    0 
+    # reuses           |    0 |    5    5 |    1    1    6 
+    Anchor correlation | 1.00 | 1.00 1.00 | 0.92 0.92 0.93 
+
+Block 1 has 868 anchors.
+Block lengths, support (nuc) & support (%) are given in order
+of the genomes (human,mouse,rat,chicken).
+So the block has length 6879989 nucleotides in human, which consists
+of anchors and gaps.
+The sum of the anchor lengths in human is 191868 nucleotides,
+which is 2.78878% of the length 6879989.
+(Note: beware that anchor lengths lose details about indels that would
+be found in a base-by-base alignment.)
+
+The remaining fields shown represent a symmetric triangular matrix;
+"| a | b c | d e f" stands for this matrix:
+          Human   Mouse   Rat   Chicken
+Human         0       a     b         d
+Mouse         a       0     c         e
+Rat           b       c     0         f
+Chicken       d       e     f         0
+
+The pairwise breakpoint graph between each pair of species is formed
+and the parameters distance, # breakpoints, ... are given for each.
+Since this is the anchors in a block, this is the breakpoint graph for
+a directed linear chromosome (the "unichromosomal" case given by
+GRIMM/MGR -L option).
+
+Anchor correlation means that if you do a dotplot of the anchors,
+where an anchor of length L is a diagonal line segment contributing
+L points, then you get a correlation between the coordinates in the
+two species.
+
+For macrorearrangement analysis, the breakpoint graph is for the
+multichromosomal case.  The matrices are shown as full square matrices,
+e.g.,
+  Distance Matrix:
+      0  195  186  308
+    195    0   62  378
+    186   62    0  370
+    308  378  370    0
+
+means that the distances are
+d(human,mouse)=195
+d(human,rat)=186
+d(human,chicken)=308
+d(mouse,rat)=62
+d(mouse,chicken)=378
+d(rat,chicken)=370
+
+--------------------------------------
+|  GRIMM-Synteny output: blocks.txt  |
+--------------------------------------
+
+k-way coordinate format described above for input files.
+The ID #'s are filled in instead of being 0 as in the example.
+The lengths are typically much larger than for input files.
+
+-----------------------------------------
+|  GRIMM-Synteny output: mgr_macro.txt  |
+-----------------------------------------
+
+This has the GRIMM/MGR input format, specifying the rearrangement
+of the blocks in all the species.
+For details on the coordinates of the blocks, look in blocks.txt.
+For details on the anchors in the blocks, look in mgr_micro.txt.
+
+-----------------------------------------
+|  GRIMM-Synteny output: mgr_micro.txt  |
+-----------------------------------------
+
+One entry per block, as follows (but w/o the indentation):
+
+   # begin_block 10 1 24320932 1443187 + 4 132585986 828763 - 5 153293080 857698 - 23 1883919 273937 -
+   # begin_anchors
+   1 1 24320932 29013 + 4 133383643 31106 - 5 154124843 25935 - 23 2141145 16711 -
+   1 1 24423016 98910 + 4 133275582 58788 - 5 154015283 61639 - 23 2120847 7307 -
+   2 1 24900157 9812 + 4 132990859 6557 - 5 153717691 7929 - 23 2032428 2510 +
+   3 1 25244509 165716 + 4 132924463 31587 - 5 153648716 33667 - 23 2010590 6304 -
+   3 1 25493826 4349 + 4 132805301 22521 - 5 153516871 11258 - 23 1965811 14142 -
+   3 1 25751376 12743 + 4 132585986 9153 - 5 153293080 5907 - 23 1883919 8107 -
+   # end_anchors
+   # begin_mgr
+   >Human
+   1 2 3 
+   >Mouse
+   1 2 3 
+   >Rat
+   1 2 3 
+   >Chicken
+   1 -2 3 
+   # end_mgr
+   # end_block
+
+The "begin_block" line is followed by 4-way coordinate format
+(block ID 10, matching block 10 in blocks.txt and mgr_macro.txt,
+then its coordinates (chromosome,start,length,sign) in all 4 species).
+
+Between begin_anchors ... end_anchors is a list of the anchors supporting
+this block.
+
+The ID field on the anchors is used to denote ID of a "compressed anchor"
+In this case the 6 anchors condense into 3 compressed anchors (maximal
+strips of anchors with uninterrupted order and direction in all species).
+
+The begin_mgr ... end_mgr section shows the signed order of the compressed
+anchors in the different species.  This must be used in GRIMM/MGR
+with the -L (directed linear chromosome) option (flipping the "chromosome"
+counts as an operation, since the block sign was used in determining
+that Mouse is 1 2 3, not -3 -2 -1).
+
+------------------------------------------------
+|  GRIMM-Synteny output: mgr_micro_equiv.txt   |
+------------------------------------------------
+
+  ...
+  group with 28 blocks of length 3: 10 26 27 36 79 82 86 94 155 166 187 189 193 206 222 284 288 290 305 325 355 388 391 395 425 430 525 539
+  ...
+
+The permutation of compressed anchors shown in block 10
+   >Human
+   1 2 3 
+   >Mouse
+   1 2 3 
+   >Rat
+   1 2 3 
+   >Chicken
+   1 -2 3
+also occurs in blocks 26, 27, 36, ..., 539.
+
+

@@ -1,0 +1,255 @@
+------------------
+|  INTRODUCTION  |
+------------------
+
+Program: GRIMM-Synteny 2.02
+Author:  Glenn Tesler, gptesler@math.ucsd.edu
+Date:    19 March 2008
+
+Contains code from GRAPPA 1.02 by David A. Bader, Bernard M.E. Moret,
+Tandy Warnow, Stacia K Wyman, Mi Yan.
+
+GRIMM-Synteny takes coordinates of "orthologous elements"
+(alignments or homologous genes) and forms syntenic blocks that
+allow for some degree of internal rearrangments of the orhologous
+elements within a block.
+
+-----------
+|  SETUP  |
+-----------
+
+This program has only been tested on SunOS, Linux, and Mac OS X.
+
+("%" is the unix prompt)
+
+% gzip -d GRIMM_SYNTENY-2.02.tar.gz
+% tar xvf GRIMM_SYNTENY-2.02.tar
+% cd GRIMM_SYNTENY-2.02
+% make
+
+("gzip -d" might be "gunzip" on your system)
+("make" might be "gmake")
+
+The executable is called grimm_synt and you should either copy it to
+your bin directory or should add this directory to your PATH.
+Demonstration files for gene-based data are in the subdirectory
+data/hmrc_gene_data.
+Demonstration files for alignment-based data are in a separate
+download, hmrc_align_data.
+
+-----------
+|  USAGE  |
+-----------
+
+Usage 1 (GRIMM-Synteny): ./grimm_synt -f inputfile -d outdir [other options]
+    -f inputfile: file with anchor coordinates
+    -d outdir: directory in which to write all output files
+
+  Gap threshold:
+    -g [#|#,#,...]: gap thresholds per-species
+    -G #: Total gap threshold, using sum of intraspecies gaps
+
+  Minimmum block size:
+    -m [n][#|#,#,...]: minimum block size per-species in current metric,
+       unless prefixed by letter n (nucleotide metric) to override -p.
+       When using -p, can use two -m's, one with 'n' and one without.
+    -M [#|#,#,...]: minimum support per block per-species
+    -n #: minimum # anchors per block
+
+  Other settings:
+    -c: condense strips
+    -O: skip block overlap/containment analysis & repair
+    -p: use permutation metric instead of nucleotides (same as -P 2,2)
+    -P a,b: use permutation metric instead of nucleotides:
+            anchor #i on a chromosome is at [a*i,a*i+b)
+    -Q: alternate format of output files: signs 1,-1 instead of +,-;
+        mgr_micro.txt in altered form to be readable by matlab as a matrix
+
+  Incomplete/experimental:
+    -S i1,j1,i2,j2,...: reject perms whose Robinson-Schensted shape has
+       any cells (i1,j1), (i2,j2),... where these are 0-based matrix style
+    -r #: minimum correlation coefficient for anchors; delete if smaller
+    -R #: minimum correlation coefficient for anchors; warn if smaller
+
+Usage 2 (GRIMM-Anchors): ./grimm_synt -A -f inputfile -d outdir [other options]
+    -A: perform the GRIMM-Anchors algorithm.  Required for this usage.
+    -f inputfile: file with anchor coordinates
+    -d outdir: directory in which to write all output files
+    -c: condense strips of tandem repeats into singletons (EXPERIMENTAL)
+    -T #: value between .5 and 1.  When repeat signs are ambiguous, choose a
+          sign if a fraction > # of the inputs are consistent with that sign.
+    -z: Input file is species-on-self alignment coordinates.
+
+------------
+|  FORMAT  |
+------------
+
+"k-way coordinate format":
+This is the format of input files to GRIMM-Synteny and GRIMM-Anchors,
+and is also the format of some of the output files
+(unique_coords.txt on GRIMM-Anchors output,
+blocks.txt on GRIMM-Synteny output).
+Do not include the indentation shown here:
+
+   # comments are lines beginning with #
+   # special comments to specify the species:
+   # genome1: human
+   # genome2: mouse
+   # genome3: rat
+   # genome4: chicken
+   #
+   # So there are k=4 species. Each line will have 4k+1 fields:
+   # ID genome1_chr genome1_start genome1_len genome1_sign genome2_chr genome2_start genome2_len genome2_sign genome3_chr genome3_start genome3_len genome3_sign genome4_chr genome4_start genome4_len genome4_sign
+   #
+   # ID is a number.  Use 0 if not important.
+   # *_chr: chromosome name (can be a string)
+   # *_start: start coordinates in nucleotides on + strand
+   # *_len: length in nucleotides on + strand
+   # *_sign: "+" or "1" or "+1" for positive strand
+   #         "-" or "-1" for negative strand (meaning the based paired
+   #         to those on the positive strand whose coordinates were just
+   #         given)
+   0 1 923263 34266 + 4 152775215 17272 - 5 172969637 9230 - 21 2548631 5315 +
+   0 5 126929555 37439 + 18 57731473 26125 + 18 53194208 22005 + W 4319028 17980 +
+   0 X 150617234 38651 + X 57109277 40007 + X 159004248 23578 + 4 11049589 9069 -
+
+GRIMM-Synteny output:
+
+Format of blocks.txt:
+   k-way coordinate format described above for input files.
+   The ID #'s are filled in instead of being 0 as in the example.
+   The lengths are typically much larger than for input files.
+
+Format of mgr_macro.txt:
+   This is a GRIMM/MGR readable file; see the documentation for those.
+
+Format of mgr_micro.txt:
+   See README_formats.
+
+Format of mgr_micro_equiv.txt:
+   See README_formats.
+
+Format of report.txt:
+   See README_formats.
+
+
+GRIMM-Anchors output (invoked with -A option):
+
+Format of report_ga.txt:
+  Log file describing the parameters for GRIMM-Anchors,
+  how many non-conflicting alignments were kept,
+  how many conflicting alignments were merged into "merged anchors",
+  and how many were found to be in repeat families.
+
+Format of unique_coords.txt:
+  This consists of anchor coordinates using the
+  k-way format shown above.
+
+Format of repeat_coords.txt:
+  Describes repeat families that were either filtered out or
+  retained by merging into a single line.
+  See README_formats.
+
+--------------
+|  EXAMPLES  |
+--------------
+
+Here are few basic examples that you should be able to run directly.
+
+EXAMPLE 1. Gene-based data in directory data/hmrc_gene_data
+Change to that directory or to a copy of that directory.
+
+Note: you will create subdirectories "anchors" and "gene7" in the
+steps below.  The distribution has corresponding directories
+with different names, "anchors_example" and "gene7_example";
+the names were changed so that the commands below will not overwrite
+them.
+
+Step 1: run GRIMM-Anchors to filter out genes with conflicting coordinates
+(If you don't like the results, you need to pre-filter them better your own
+way and try again.)
+
+% mkdir anchors
+% grimm_synt -A -f hmrc_genes_coords.txt -d anchors
+where
+  -A: run GRIMM-Anchors algorithm
+  -f align_coords.txt: input is file align_coords.txt in k-way format (k=4)
+  -d anchors: output files to directory anchors
+
+This outputs
+   anchors/unique_coords.txt: anchors in k-way format
+   anchors/report_ga.txt: report on how many anchors were kept/deleted
+
+Step 2: run GRIMM-Synteny to form syntenic blocks with one set of parameters
+Step 3: use your criteria to validate the blocks
+Repeat steps 2-3 with different parameters until you're happy
+
+Step 2:
+% mkdir gene7
+% grimm_synt -f anchors/unique_coords.txt -d gene7 -c -p -m 6 -g 7
+where
+  -f anchors/unique_coords.txt:
+     input is file anchors/unique_coords.txt in k-way format
+  -d gene7: output files to directory gene7
+  -c: condense strips of blocks into single blocks
+  -p: use permutation metric (often used for gene-based studies)
+  -m 6: minimum block size: 6 units in permutation metric
+  -g 7: maximum gap threshold per-species: 7 units in permutation metric
+
+Step 4:
+Run GRIMM or MGR on the output from grimm_synt.
+For a pairwise distance matrix, use
+
+% grimm -f gene7/mgr_macro.txt -m
+
+
+EXAMPLE 2. Alignment-based data hmrc_align_data in separate download.
+Change to directory hmrc_align_data or to a copy of it.
+
+Note: you will create subdirectories "anchors" and "300K" in the
+steps below.  The distribution has corresponding directories
+with different names, "anchors_example" and "300K_example";
+the names were changed so that the commands below will not overwrite
+them.
+
+Step 1: run GRIMM-Anchors
+% mkdir anchors
+% grimm_synt -A -f hmrc_align_coords.txt -d anchors
+
+Step 2:
+% mkdir 300K
+% grimm_synt -f anchors/unique_coords.txt -d 300K -c -m 300000 -g 300000
+where it's in the nucleotide metric (since -p was not used)
+  -m 300000: minimum span of block per species is 300000 nucleotides
+  -g 300000: maximum gap threshold per species is 300000 nucleotides
+
+
+----------------
+|  REFERENCES  |
+----------------
+
+1. Pevzner, P.A. and Tesler G. (2003a) Genome rearrangements in mammalian
+   evolution: lessons from human and mouse genomes. Genome Res 13(1):
+   37-45.
+
+2. Pevzner, P.A. and Tesler, G. (2003b) "Transforming Men into Mice: The
+   Nadeau-Taylor Chromosomal Breakage Model Revisited" in Proceedings of
+   RECOMB 2003, pp. 247-256.
+
+3. Hillier, L., et al. (2004) Sequence and comparative analysis of the
+   chicken genome provide unique perspectives on vertebrate
+   evolution. Nature 432: 695-716.
+
+4. Bourque, G., Pevzner P.A. and Tesler G. (2004) Reconstructing the
+   genomic architecture of ancestral mammals: lessons from human, mouse,
+   and rat genomes. Genome Res 14(4): 507-16.
+
+5. Bourque G., Zdobnov E., Bork P., Pevzner P., Tesler G., (2005) Genome
+   Rearrangements in Human, Mouse, Rat and Chicken. Genome Res. 15(1):
+   98-110.
+   
+----------
+|  BUGS  |
+----------
+
+Contact: gptesler@math.ucsd.edu

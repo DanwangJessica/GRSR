@@ -1,0 +1,20 @@
+# Example from page 225 of book
+#    Pavel A. Pevzner,
+#    Comptational Molecular Biology: An Algorithmic Approach,
+#    (c) 2000, Massachusetts Institute of Technology
+#
+# Capping and transform gamma into pi:
+#    grimm -f p225.txt
+#
+# Capping and transform pi into gamma:
+#    grimm -f p225.txt -g 2,1
+
+>gamma
+1 2 3 4 $
+5 6 7 8 $
+9 10 11 12 $
+
+>pi
+-3 -2 $
+-1 4 5 6 7 12 $
+10 9 11 8 $

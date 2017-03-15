@@ -1,0 +1,18 @@
+# Unsigned linear genomes
+#
+# Distance matrix:
+#    grimm -f unsigned1.txt -L -u
+#
+# Scenario from genome1 to genome2:
+#    grimm -f unsigned1.txt -L -u -g 1,2
+#
+# Heuristic to guess optimal signs for all genomes:
+#    grimm -f unsigned1.txt -L -U 100 
+
+
+>genome1
+1 2 3 4 5
+>genome2
+1 4 3 2 5
+>genome3
+2 1 3 4 5

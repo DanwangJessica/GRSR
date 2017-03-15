@@ -1,0 +1,18 @@
+# Example from page 188 of book
+#    Pavel A. Pevzner,
+#    Comptational Molecular Biology: An Algorithmic Approach,
+#    (c) 2000, Massachusetts Institute of Technology
+#
+# This is the Gollan permutation for n=12.
+# It is unsigned and linear.
+#
+#    grimm -f gollan12.txt -L -u
+# or
+#    grimm -f gollan12.txt -L -U 100
+
+
+>identity
+1 2 3 4 5 6 7 8 9 10 11 12
+>gollan(12)
+3 1 5 2 7 4 9 6 11 8 12 10
+

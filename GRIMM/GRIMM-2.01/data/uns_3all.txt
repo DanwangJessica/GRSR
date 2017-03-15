@@ -1,0 +1,34 @@
+# All 13 of these are equivalent as unsigned circular genomes:
+#   grimm -f uns_3all.txt -C -u
+# should display a matrix of 0's, since the genomes are identical
+# (just represented differently).
+#
+# Leaving out -C or -u, or changing -C to -L, will not give a matrix of 0's,
+# because the representations will no longer be regarded as equivalent.
+
+>a
+1 2 3
+>b
+2 3 1
+>c
+3 1 2
+>d
+-3 -2 -1
+>e
+-2 -1 -3
+>f
+-1 -3 -2
+>g
+-1 -2 -3
+>h
+-2 -3 -1
+>i
+-3 -1 -2
+>j
+3 2 1
+>k
+2 1 3
+>l
+1 3 2
+>m
+1 -3 2

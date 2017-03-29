@@ -1,0 +1,36 @@
+Thu May  5 16:13:14 2016: Start job
+Thu May  5 16:13:14 2016: Scan anchors
+Thu May  5 16:13:14 2016: Allocate space
+Thu May  5 16:13:14 2016: Read anchors
+Parameters:
+Algorithm:             GRIMM-Anchors
+Input file:            ./Example/2.Scaffolds/core_coords.txt
+  # species:           3
+  # alignments:        111
+Output directory:      ./Example/2.Scaffolds/anchors
+Tandem repeats         Do not condense
+Ambiguous sign thresh: 0.666667
+
+Thu May  5 16:13:14 2016: Sort anchors
+Thu May  5 16:13:14 2016: Sorting species 1
+Thu May  5 16:13:14 2016: Sorting species 2
+Thu May  5 16:13:14 2016: Sorting species 3
+Thu May  5 16:13:14 2016: Sort for each species
+Thu May  5 16:13:14 2016: Determine conflicting alignments
+0 conflicts in species 1
+0 conflicts in species 2
+0 conflicts in species 3
+Thu May  5 16:13:14 2016: Output anchors and repeats
+111 anchors output:
+   111 as-is anchors
+   0 merged anchors
+   Used 111 input alignments for those
+0 repeats output:
+   0 merged anchors
+   0 non-merged repeat families
+111 components:
+   111 as-is anchors
+   0 merged anchors
+   0 non-merged repeat families
+Thu May  5 16:13:14 2016: Free space
+Thu May  5 16:13:14 2016: Done

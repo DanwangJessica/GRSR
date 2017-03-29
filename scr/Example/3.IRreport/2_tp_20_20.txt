@@ -1,0 +1,34 @@
+Query= 2 /home/wangdan/scr/Example/Genomes/GCA_000359505.1_ASM35950v1_
+genomic.fna 4237735 4240074
+         (2340 letters)
+
+ ***** No hits found ******
+
+
+Lambda     K      H
+    1.37    0.711     1.31 
+
+Gapped
+Lambda     K      H
+    1.37    0.711     1.31 
+
+
+Matrix: blastn matrix:1 -3
+Gap Penalties: Existence: 5, Extension: 2
+Number of Sequences: 1
+Number of Hits to DB: 163
+Number of sequences better than 1.0e-50: 0
+Number of HSP's gapped: 0
+Number of HSP's successfully gapped: 0
+Length of query: 2340
+Length of database: 7328
+Length adjustment: 12
+Effective length of query: 2328
+Effective length of database: 7316
+Effective search space: 17031648
+Effective search space used: 17031648
+X1: 11 (21.8 bits)
+X2: 15 (29.7 bits)
+X3: 50 (99.1 bits)
+S1: 15 (30.2 bits)
+S2: 96 (190.8 bits)

@@ -1,0 +1,51 @@
+Pairwise Genome Rearrangment Scenarios with repeats information:
+>From Genome 1 to 2, total rearrangment step(s): 16
+*Transposition: 3 step(s):
+Step 1: 12 through 12 Transposition:Source:N Destination:N
+Step 2: 24 through 24 Transposition:Source:N Destination:N
+Step 3: 20 through 20 Transposition:Source:N Destination:N
+*Reversal: 13 step(s):
+Step 1: 4 through 4 Reversal: Source:N Destination:N
+Step 2: 9 through 16 Reversal: Source:N Destination:N
+Step 3: 6 through -15 Reversal: Source:N Destination:N
+Step 4: 5 through -6 Reversal: Source:Found,Length = 8742,Simlarity = 99% Destination:N
+Step 5: -16 through 18 Reversal: Source:N Destination:Found,Length = 1514,Simlarity = 96%
+Step 6: 9 through 22 Reversal: Source:N Destination:N
+Step 7: 8 through -9 Reversal: Source:Found,Length = 6171,Simlarity = 100% Destination:N
+Step 8: 10 through 25 Reversal: Source:Found,Length = 446,Simlarity = 95% Destination:N
+Step 9: -25 through 26 Reversal: Source:Found,Length = 2755,Simlarity = 99% Destination:N
+Step 10: 9 through 27 Reversal: Source:N Destination:N
+Step 11: 3 through 26 Reversal: Source:N Destination:N
+Step 12: 2 through -3 Reversal: Source:Found,Length = 8466,Simlarity = 99% Destination:Found,Length = 2187,Simlarity = 99%
+Step 13: -27 through 28 Reversal: Source:Found,Length = 3158,Simlarity = 99% Destination:N
+>From Genome 1 to 3, total rearrangment step(s): 10
+*Transposition: 1 step(s):
+Step 1: 11 through 11 Transposition:Source:N Destination:N
+*Reversal: 9 step(s):
+Step 1: 4 through 4 Reversal: Source:N Destination:N
+Step 2: 8 through 8 Reversal: Source:N Destination:N
+Step 3: 10 through 25 Reversal: Source:Found,Length = 446,Simlarity = 95% Destination:N
+Step 4: -25 through 27 Reversal: Source:N Destination:N
+Step 5: -26 through 28 Reversal: Source:N Destination:N
+Step 6: -27 through 26 Reversal: Source:N Destination:N
+Step 7: 6 through 17 Reversal: Source:N Destination:N
+Step 8: 5 through -6 Reversal: Source:Found,Length = 8742,Simlarity = 99% Destination:N
+Step 9: 7 through 21 Reversal: Source:Found,Length = 5000,Simlarity = 99% Destination:Found,Length = 5000,Simlarity = 99%
+>From Genome 2 to 3, total rearrangment step(s): 11
+*Transposition: 1 step(s):
+Step 1: 20 through 20 Transposition:Source:N Destination:N
+*Inverted Transposition: 3 step(s):
+Step 1: 2 through 2 Inverted Transposition: Source:N Destination:N
+Step 2: 5 through 5 Inverted Transposition: Source:N Destination:N
+Step 3: 24 through 24 Inverted Transposition: Source:N Destination:N
+*Reversal: 7 step(s):
+Step 1: 23 through 25 Reversal: Source:N Destination:N
+Step 2: -8 through -23 Reversal: Source:N Destination:N
+Step 3: 7 through 21 Reversal: Source:Found,Length = 5001,Simlarity = 99% Destination:Found,Length = 5000,Simlarity = 99%
+Step 4: -16 through 22 Reversal: Source:N Destination:N
+Step 5: 9 through 25 Reversal: Source:N Destination:N
+Step 6: -28 through 8 Reversal: Source:N Destination:N
+Step 7: -22 through 18 Reversal: Source:N Destination:N
+Total 5 transpositions, and 0 of them have A/A/A. In 0 transpositions, A/A/A occurs in both genomes.
+Total 3 inverted transpositions, and 0 of them have A/A/-A. In 0 inverted transpositions, A/A/-A occurs in both genomes.
+Total 29 reversals, and 11 of them have A/-A. 3 of A/-A occurs in both genomes.

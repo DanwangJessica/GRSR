@@ -1,30 +1,30 @@
 
-#Introduction
+# Introduction
 GRSR is a Tool for Deriving Genome Rearrangement Scenarios for Multiple Uni-chromosomal Genomes. This tool will do the following steps:
-*Step 1. Run mugsy to get multiple sequence alignment results.
-*Step 2. Get a permutation for each strain with some parameters.
-*Step 3. Generate pairwise genome rearrangement scenarios and find repeats at the breakpoints of each rearrangement events.
+* Step 1. Run mugsy to get multiple sequence alignment results.
+* Step 2. Get a permutation for each strain with some parameters.
+* Step 3. Generate pairwise genome rearrangement scenarios and find repeats at the breakpoints of each rearrangement events.
 
 The package works under Linux system.
-*Folder scr contains code developed by me (Author: Dan WANG, danwang5-c@my.cityu.edu.hk).
-*Folder Musgy contains code by Angiuoli SV and Salzberg SL. The code was downloaded from http://mugsy.sourceforge.net/
-*Folder GRIMM-synteny and GRIMM contains code by Glenn Tesler. The code was downloaded from http://grimm.ucsd.edu/DIST/
-*Folder blast-2.2.26 contains code by NCBI. The code was downloaded from ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.26/ 
-#Example  
+* Folder scr contains code developed by me (Author: Dan WANG, danwang5-c@my.cityu.edu.hk).
+* Folder Musgy contains code by Angiuoli SV and Salzberg SL. The code was downloaded from http://mugsy.sourceforge.net/
+* Folder GRIMM-synteny and GRIMM contains code by Glenn Tesler. The code was downloaded from http://grimm.ucsd.edu/DIST/
+* Folder blast-2.2.26 contains code by NCBI. The code was downloaded from ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.26/ 
+
+# Example  
 Before running the code, please put all the five folders (scr,Musgy,blast-2.2.26,GRIMM-synteny and GRIMM) in the same directory.
 Here is an example that you can run the three steps separately. All the inputs and outputs of each step are in the [~/src/Example](src/Example) directory. Step 1 may take a long time. For example, for aligning 25 bacterial chromosomes, it will take almost 1 day. But for aligning the 3 bacterial chromosomes in our example, it will only take several minutes. Step 2 and Step 3 are fast and normally will only cost a few minutes.
-Step 1. Run mugsy to get multiple sequence alignment results:
+###### Step 1. Run mugsy to get multiple sequence alignment results:
 ```
 cd ~/Mugsy/mugsy_x86-64-v1r2.3
 mugsy --directory ~/scr/Example/1.MSA_results --prefix MSA_Result ~/scr/Example/Genomes/*.fna
 ```
 where
-	*--directory [~/scr/Example/1.MSA_results](scr/Example/1.MSA_results): the direcotry for output file
-	*--prefix MSA_Result: the prefix of the output file is MSA_Result
-	*[~/scr/Example/Genomes/*.fna](scr/Example/Genomes): all the input chromosomes which are in the fna format
-	(For the input format of mugsy, you can refer to the mugsy's website:)
+* [~/scr/Example/1.MSA_results](scr/Example/1.MSA_results): the direcotry for output file
+* MSA_Result: the prefix of the output file is MSA_Result
+* [~/scr/Example/Genomes/*.fna](scr/Example/Genomes): all the input chromosomes which are in the fna format.(For the other input formats of mugsy, you can refer to the mugsy's website.)
 This step outputs
-  	*~/scr/Example/1.MSA_results/MSA_Result.maf: multiple sequence alignment results
+ * ~/scr/Example/1.MSA_results/MSA_Result.maf: multiple sequence alignment results
 
 Step 2. Get a permutation for each strain with some parameters.
 ```

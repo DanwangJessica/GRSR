@@ -29,7 +29,7 @@ Step 1. Run mugsy to get multiple sequence alignment results:
 % cd ~/Mugsy/mugsy_x86-64-v1r2.3
 % mugsy --directory ~/scr/Example/1.MSA_results --prefix MSA_Result ~/scr/Example/Genomes/*.fna
 where
-	--directory ~/scr/Example/1.MSA_results: the output file to direcotry ~/scr/Example/1.MSA_results
+	--directory [~/scr/Example/1.MSA_results](scr/Example/1.MSA_results): the output file to direcotry ~/scr/Example/1.MSA_results
 	--prefix MSA_Result: the prefix of the output file is MSA_Result
 	~/scr/Example/Genomes/*.fna: all the input chromosomes which are in the fna format
 	(For the input format of mugsy, you can refer to the mugsy's website:)

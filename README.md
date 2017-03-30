@@ -19,8 +19,7 @@ The package works under Linux system.
 |  EXAMPLE  |
 --------------
 Before running the code, please put all the five folders (scr,Musgy,blast-2.2.26,GRIMM-synteny and GRIMM) in the same directory.
-Here is an example that you can run the three steps separately. All the inputs and outputs of each step are in the [~/src/Example](src/Example) directory.
-Step 1 may take a long time. For example, for aligning 25 bacterial chromosomes, it will take almost 1 day. But for aligning the 3 bacterial chromosomes in our example, it will only take several minutes. Step 2 and Step 3 are fast and normally will only cost a few minutes.
+Here is an example that you can run the three steps separately. All the inputs and outputs of each step are in the [~/src/Example](src/Example) directory. Step 1 may take a long time. For example, for aligning 25 bacterial chromosomes, it will take almost 1 day. But for aligning the 3 bacterial chromosomes in our example, it will only take several minutes. Step 2 and Step 3 are fast and normally will only cost a few minutes.
 -----------------------------------------------------------------------------------------
 
 Step 1. Run mugsy to get multiple sequence alignment results:
@@ -29,9 +28,9 @@ cd ~/Mugsy/mugsy_x86-64-v1r2.3
 mugsy --directory ~/scr/Example/1.MSA_results --prefix MSA_Result ~/scr/Example/Genomes/*.fna
 ```
 where
-	--directory [~/scr/Example/1.MSA_results](scr/Example/1.MSA_results): the direcotry for output file
-	--prefix MSA_Result: the prefix of the output file is MSA_Result
-	[~/scr/Example/Genomes/*.fna](scr/Example/Genomes): all the input chromosomes which are in the fna format
+	>--directory [~/scr/Example/1.MSA_results](scr/Example/1.MSA_results): the direcotry for output file
+	>--prefix MSA_Result: the prefix of the output file is MSA_Result
+	>[~/scr/Example/Genomes/*.fna](scr/Example/Genomes): all the input chromosomes which are in the fna format
 	(For the input format of mugsy, you can refer to the mugsy's website:)
 
 This step outputs

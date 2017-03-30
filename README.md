@@ -49,6 +49,7 @@ This step outputs
 - Secondly, detect independent block-interchange and transposition events and find repeats at the breakpoints, the result is written to the reportA.txt;
 - Thirdly, calculate the reversals between the two genomes by using grimm after removing the independent block-interchanges and transpositions in step 2;
 - Lastly, check whether a pair of inverted repeats exist at the two ends of an reversal and store the results in reportA.txt
+
 Commands for Step 3:
 ```
 cd ~/scr

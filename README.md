@@ -26,19 +26,21 @@ Step 1. Run mugsy to get multiple sequence alignment results:
 ```
 cd ~/Mugsy/mugsy_x86-64-v1r2.3
 mugsy --directory ~/scr/Example/1.MSA_results --prefix MSA_Result ~/scr/Example/Genomes/*.fna
-```
-where
-	>--directory [~/scr/Example/1.MSA_results](scr/Example/1.MSA_results): the direcotry for output file
-	>--prefix MSA_Result: the prefix of the output file is MSA_Result
-	>[~/scr/Example/Genomes/*.fna](scr/Example/Genomes): all the input chromosomes which are in the fna format
-	(For the input format of mugsy, you can refer to the mugsy's website:)
 
+where
+	--directory [~/scr/Example/1.MSA_results](scr/Example/1.MSA_results): the direcotry for output file
+	--prefix MSA_Result: the prefix of the output file is MSA_Result
+	[~/scr/Example/Genomes/*.fna](scr/Example/Genomes): all the input chromosomes which are in the fna format
+	(For the input format of mugsy, you can refer to the mugsy's website:)
+```
 This step outputs
   	~/scr/Example/1.MSA_results/MSA_Result.maf: multiple sequence alignment results
 
 Step 2. Get a permutation for each strain with some parameters.
-% cd ~/scr
-% sh getScaffolds.sh 500 3000
+```
+cd ~/scr
+sh getScaffolds.sh 500 3000
+```
 where 
 	500: is the minimum block size
 	3000: is the maximum gap threshold

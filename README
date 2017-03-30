@@ -1,8 +1,7 @@
 --------------
 |  Introduction  |
 --------------
-This package will do the following steps:
-load and unzip the folder named SourceCode, you will find five sub-Folders and a README.txt in folder SourceCode.
+GRSR is a Tool for Deriving Genome Rearrangement Scenarios for Multiple Uni-chromosomal Genomes. This tool will do the following steps:
 
 Step 1. Run mugsy to get multiple sequence alignment results.
 
@@ -11,16 +10,16 @@ Step 2. Get a permutation for each strain with some parameters.
 Step 3. Generate pairwise genome rearrangement scenarios and find repeats at the breakpoints of each rearrangement events.
 
 The package works under Linux system.
+-Folder scr contains code developed by me (Author: Dan WANG, danwang5-c@my.cityu.edu.hk).
 -Folder Musgy contains code by Angiuoli SV and Salzberg SL. The code was downloaded from http://mugsy.sourceforge.net/
 -Folder GRIMM-synteny and GRIMM contains code by Glenn Tesler. The code was downloaded from http://grimm.ucsd.edu/DIST/
 -Folder blast-2.2.26 contains code by NCBI. The code was downloaded from ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.26/ 
--Folder scr contains code developed by me (Author: Dan WANG, danwang5-c@my.cityu.edu.hk).
 
 --------------
 |  EXAMPLE  |
 --------------
-Before running the code, please put all the five folders (Musgy,blast-2.2.26,scr,GRIMM-synteny and GRIMM) in the same directory.
-Here is an example that you can run the following four steps separately. All the inputs and outputs of each step are in the ~/src/Example directory.
+Before running the code, please put all the five folders (scr,Musgy,blast-2.2.26,GRIMM-synteny and GRIMM) in the same directory.
+Here is an example that you can run the three steps separately. All the inputs and outputs of each step are in the ~/src/Example directory.
 
 Step 1 may take a long time. For example, for aligning 25 bacterial chromosomes, it will take almost 1 day. But for aligning the 3 bacterial chromosomes in our example, it will only take several minutes.
 Step 2~Step 4 are fast and normally will only cost a few minutes.

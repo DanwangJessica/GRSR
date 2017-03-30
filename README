@@ -35,7 +35,7 @@ where
 	(For the input format of mugsy, you can refer to the mugsy's website:)
 
 This step outputs
-  	scr/Example/1.MSA_results/MSA_Result.maf: multiple sequence alignment results
+  	~/scr/Example/1.MSA_results/MSA_Result.maf: multiple sequence alignment results
 
 Step 2. Get a permutation for each strain with some parameters.
 % cd ~/scr

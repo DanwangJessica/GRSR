@@ -24,10 +24,10 @@ Step 1 may take a long time. For example, for aligning 25 bacterial chromosomes,
 -----------------------------------------------------------------------------------------
 
 Step 1. Run mugsy to get multiple sequence alignment results:
-'''
+```
 cd ~/Mugsy/mugsy_x86-64-v1r2.3
 mugsy --directory ~/scr/Example/1.MSA_results --prefix MSA_Result ~/scr/Example/Genomes/*.fna
-'''
+```
 where
 	--directory [~/scr/Example/1.MSA_results](scr/Example/1.MSA_results): the direcotry for output file
 	--prefix MSA_Result: the prefix of the output file is MSA_Result

@@ -2,8 +2,8 @@
 # Introduction
 GRSR is a Tool for Deriving Genome Rearrangement Scenarios for Multiple Uni-chromosomal Genomes. This tool will do the following steps:
 * Step 1. Run mugsy to get multiple sequence alignment results.
-* Step 2. Get a permutation for each strain with some parameters.
-* Step 3. Generate pairwise genome rearrangement scenarios and find repeats at the breakpoints of each rearrangement events.
+* Step 2 & 3. Extraction of the Coordinates of Core Blocks, Construction of Synteny Blocks and Generating Signed Permutations.
+* Step 4. Generate pairwise genome rearrangement scenarios and find repeats at the breakpoints of each rearrangement events.
 
 The package works under Linux system.
 * Folder scr contains code developed by me (Author: Dan WANG, danwang5-c@my.cityu.edu.hk).

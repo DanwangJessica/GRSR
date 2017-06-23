@@ -28,7 +28,7 @@ where
 This step outputs
  * [~/scr/Example/1.MSA_results/MSA_Result.maf](scr/Example/1.MSA_results/MSA_Result.maf): multiple sequence alignment results
 
-## Step 2. Get a permutation for each strain with some parameters.
+## Step 2 and 3. Extraction of the Coordinates of Core Blocks, Construction of Synteny Blocks and Generating Signed Permutations
 Commands for Step 2:
 ```
 cd ~/scr
@@ -44,11 +44,11 @@ This step outputs
 * [~/scr/Example/2.Scaffolds/cordis.maf](scr/Example/2.Scaffolds/cordis.maf): the multiple sequence alignment result without the strain-specific segments
 * [~/scr/Example/2.Scaffolds/core_coords.txt](scr/Example/2.Scaffolds/core_coords.txt): is the positions of core-genome blocks in each strain without filtering short blocks and merging consecutive blocks.
  
-## Step 3. Generate pairwise genome rearrangement scenarios and find repeats at the breakpoints of each rearrangement events.
+## Step 4. Generate pairwise genome rearrangement scenarios and find repeats at the breakpoints of each rearrangement events.
 - Firstly, merget the consecutive blocks in both the two strains;
-- Secondly, detect independent block-interchange and transposition events and find repeats at the breakpoints, the result is written to the reportA.txt;
+- Secondly, detect independent block-interchange and transposition events and find repeats at the breakpoints, the result is written to the report.txt;
 - Thirdly, calculate the reversals between the two genomes by using grimm after removing the independent block-interchanges and transpositions in step 2;
-- Lastly, check whether a pair of inverted repeats exist at the two ends of an reversal and store the results in reportA.txt
+- Lastly, check whether a pair of inverted repeats exist at the two ends of an reversal and store the results in report.txt
 
 Commands for Step 3:
 ```

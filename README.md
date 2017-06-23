@@ -13,7 +13,7 @@ The package works under Linux system.
 
 # Example  
 Before running the code, please put all the five folders (scr,Musgy,blast-2.2.26,GRIMM-synteny and GRIMM) in the same directory.
-Here is an example that you can run the three steps separately. All the inputs and outputs of each step are in the [~/src/Example](src/Example) directory. Step 1 may take a long time. For example, for aligning 25 bacterial chromosomes, it will take almost 1 day. But for aligning the 3 bacterial chromosomes in our example, it will only take several minutes. Step 2 and Step 3 are fast and normally will only cost a few minutes.
+Here is an example that you can run the four steps separately. All the inputs and outputs of each step are in the [~/src/Example](src/Example) directory. Step 1 may take a long time. For example, for aligning 25 bacterial chromosomes, it will take almost 1 day. But for aligning the 3 bacterial chromosomes in our example, it will only take several minutes. Step 2 and Step 3 are fast and normally will only cost a few minutes.
 ## Step 1. Run mugsy to get multiple sequence alignment results:
 Commands for Step 1:
 ```

@@ -29,7 +29,7 @@ This step outputs
  * [~/scr/Example/1.MSA_results/MSA_Result.maf](scr/Example/1.MSA_results/MSA_Result.maf): multiple sequence alignment results
 
 ## Step 2 and 3. Extraction of the Coordinates of Core Blocks, Construction of Synteny Blocks and Generating Signed Permutations
-Commands for Step 2:
+Commands for Step 2 and 3:
 ```
 cd ~/scr
 sh getScaffolds.sh 500 3000
@@ -50,7 +50,7 @@ This step outputs
 - Thirdly, calculate the reversals between the two genomes by using grimm after removing the independent block-interchanges and transpositions in step 2;
 - Lastly, check whether a pair of inverted repeats exist at the two ends of an reversal and store the results in report.txt
 
-Commands for Step 3:
+Commands for Step 4:
 ```
 cd ~/scr
 sh reptA.sh ./Example/2.Scaffolds/anchors_500_3000_c/mgr_macro.txt ./Example/2.Scaffolds/anchors_500_3000_c/blocks.txt .Example/2.Scaffolds/cordis.maf ./Example/Genomes ./Example/3.Repreport 100 90 5000
